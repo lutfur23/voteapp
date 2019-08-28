@@ -32,9 +32,7 @@
 
         
         postApi(happyVote, unhappyVote, angryVote){
-	  alert("clicked!")
           let voterID = getCookie("voterid");
-
           let uservote = {
             VoterId: voterID,
 	    Happy: happyVote,
