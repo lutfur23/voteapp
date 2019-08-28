@@ -51,10 +51,10 @@
              .then(function(resp){
                // update current state
 		this.setState({
-                  totalVotes: resp.data.TotalVotes,
-                  totalHappyVote: resp.data.TotalHappyVote,
-                  totalUnhappyVote:resp.data.TotalUnhappyVote,
-                  totalAngryVote:resp.data.TotalAngryVote,
+                  totalVotes: resp.TotalVotes,
+                  totalHappyVote: resp.TotalHappyVote,
+                  totalUnhappyVote:resp.TotalUnhappyVote,
+                  totalAngryVote:resp.TotalAngryVote,
                   loading: false
                });
            })
