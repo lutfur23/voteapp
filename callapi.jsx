@@ -1,25 +1,31 @@
   class App extends React.Component {
 
      constructor(props) {
-      super(props);
-      this.state = this.state = {
-	 name:'',
-         totalVotes:'0',
-         totalHappyVote:'0',
-         totalUnhappyVote:'0',
-         totalAngryVote:'0',
-         loading: false
+     super(props);                  
+     this.state = this.state = {
+        name:'',
+        totalVotes:'0',
+ 	totalHappyVote:'0',
+	totalUnhappyVote:'0',
+        totalAngryVote:'0',
+	loading: true
        }
       }
-
+      
+      componentWillMount(){
+           this.getVotes()
+      }
       componentDidMount(){
-        fetch('https://merajjwtapi.azurewebsites.net/api/votes', {mode:'cors'})
+           //this.getVotes()
+        }
+
+       getVotes(){
+	fetch('https://merajjwtapi.azurewebsites.net/api/votes', {mode:'cors'})
        .then((result) => {
            //If we want text, call result.text() or for json call result.json()
           var resultStr = result.json();
           return resultStr;
           }).then((jresult) => {
-            console.log(jresult);
             //update the state
             this.setState({
                totalVotes:jresult.TotalVotes,
@@ -29,7 +35,7 @@
                loading: false
              });
           })
-        }
+	}
 
         
         postApi(happyVote, unhappyVote, angryVote){
@@ -41,7 +47,7 @@
             Angry: angryVote
           }
 
-          fetch('http://merajjwtapi.azurewebsites.net/api/votes', {
+          fetch('https://merajjwtapi.azurewebsites.net/api/votes', {
 	    mode:'cors',
 	    method: 'POST', 
             headers: {
@@ -64,8 +70,7 @@
 
 
         render() {
-           
-            return (
+            return ( 
                 <div>
 		    <h3>Total casted votes : {this.state.totalVotes}</h3>
                     <button onClick={() => this.postApi(1,0,0)}> <img height="22" width="22" src="./images/happy.png"/> <b>Happy</b></button>
