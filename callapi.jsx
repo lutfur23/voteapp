@@ -51,22 +51,24 @@
 	    mode:'cors',
 	    method: 'POST', 
             headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
+              'Content-Type': 'application/json'
             },
             body: JSON.stringify(uservote)
             })
              .then(function(resp){
-               // update current state
-		this.setState({
-                  totalVotes: resp.TotalVotes,
-                  totalHappyVote: resp.TotalHappyVote,
-                  totalUnhappyVote:resp.TotalUnhappyVote,
-                  totalAngryVote:resp.TotalAngryVote,
-                  loading: false
-               });
-           })
-        }        
+		var resultJson = resp.json();
+          	return resultJson;
+          	}).then((jresult) => {
+                  // update current state
+ 		  this.setState({
+                      totalVotes: jresult.TotalVotes,
+	              totalHappyVote: jresult.TotalHappyVote,
+                      totalUnhappyVote:jresult.TotalUnhappyVote,
+                      totalAngryVote:jresult.TotalAngryVote,
+                      loading: false
+                   });
+               })
+          }        
 
 
         render() {
